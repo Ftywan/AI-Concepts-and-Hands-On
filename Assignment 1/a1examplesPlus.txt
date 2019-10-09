@@ -1,0 +1,13 @@
+1. five_x_cubed_plus_2(2) -> 42
+1. five_x_cubed_plus_2(4) -> 322
+
+2. triple_up([3,5,3,7,8,5,3,2,2,4,6,8,9,7,5,3,7,9,4])  ->  [[3,5,3],[7,8,5],[3,2,2],[4,6,8],[9,7,5],[3,7,9],[4]]
+
+3. mystery_code("Windows Users are all Dummies!") -> "rDIYJRN pNZMN VMZ VGG yPHHDZN!"
+
+
+4 future_tense(['I', 'went', 'to', 'the', 'campus', 'for', 'pizza', 'yesterday']) ->
+['I', 'will', 'go', 'to', 'the', 'campus', 'for', 'pizza', 'tomorrow']
+
+  future_tense(['Life', 'was', 'bad', 'yesterday']) ->
+ ['Life', 'will', 'be', 'bad', 'tomorrow']

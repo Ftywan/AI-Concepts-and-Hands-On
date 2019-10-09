@@ -1,0 +1,68 @@
+0A: Hi my name is Johshua Ng from Singapore. You can call me Josh if you want.
+I was proggrammed by Tianyuan Fu and if you have any comments to me please contact him at tyfu@uw.edu.
+So, welcome to my kopitiam and what can I do for you?
+0A: Joshua: Hi my name is Johshua Ng from Singapore. You can call me Josh if you want.
+I was proggrammed by Tianyuan Fu and if you have any comments to me please contact him at tyfu@uw.edu.
+So, welcome to my kopitiam and what can I do for you?
+
+0B: Eva: My name is Eva, and I'm the graduate program advisor +for Engineering. I was programmed by Yilin Wang. If you don't like the +interaction or have some suggestions, contact her at yiwa0808@uw.edu. +So what can I do for you today?
+
+1A: Joshua: How are you ah, by the way?
+
+1B: Eva: Wait a moment, let me check how.
+
+2A: Joshua: Eat laksa for lunch? You hungry now?
+
+2B: Eva: Eat laksa for lunch You hungry now?I believe you can do it.
+
+3A: Joshua: Paiseh ah, I cannot do that
+
+3B: Eva: Be more detailed.
+
+4A: Joshua: Paiseh ah, I cannot do that
+
+4B: Eva: Could you explain that to me?
+
+5A: Joshua: Wah talk too much already, shag man.
+
+5B: Eva: I want a bike.
+
+6A: Joshua: Siao, yourself look like a bike. (CYCLE 1: TRIGGERED BY 'I WANT')
+
+6B: Eva: I want a pen.
+
+7A: Joshua: Ask your dad for the pen. (CYCLE 2: TRIGGERED BY 'I WANT')
+
+7B: Eva: Worrying is normal. Just don't be so anxious.
+
+8A: Joshua: You know are there any activies?
+
+8B: Eva: Just tell me what you are thinking.
+
+9A: Joshua: I feel so sad.
+
+9B: Eva: Eh, cheer up! (RANDOMLY CHOSEN FROM 'SAD_WORDS')
+
+10A: Joshua: Wah talk too much already, shag man.
+
+10B: Eva: Be free to ask me about any problems.
+
+11A: Joshua: Paiseh ah, I cannot do that
+
+11B: Eva: Even if I can't help you solve it, I could tell you where you should go to ask for help about that.
+
+12A: Joshua: How are you ah, by the way?
+
+12B: Eva: Wait a moment, let me check how.
+
+13A: Joshua: Eh you have said that. Don't play play ah. (THE BOT WILL REMEMBER THE TOPIC SAID IN THE CONVERSATION AND POINT IT OUT)
+
+13B: Eva: I am happy to answer your questions
+
+14A: Joshua: Wah lao! Tell me more about why you are happy to answer my questions.
+
+14B: Eva: Be more detailed.
+
+15A: Joshua: Eh you have said that. Don't play play ah.
+
+15B: Eva: Could you explain that to me?
