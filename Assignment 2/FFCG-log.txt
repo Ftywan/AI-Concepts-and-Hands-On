@@ -1,0 +1,111 @@
+python3 Int_Solv_Client.py Farmer_Fox
+problem_name = Farmer_Fox
+Int_Solv_Client (Version 1)
+FFCG; 1.0
+
+Step 0, Depth 0
+CURRENT_STATE =
+The farmer is on the left
+The fox is on the left
+The chicken is on the left
+The grain is on the left
+The boat is on the left.
+
+0: Cross the river with no other person
+2: Cross the river with the chicken
+Enter command: 0, 1, 2, etc. for operator; B-back; H-help; Q-quit. >> 2
+Operator 2 selected.
+
+Step 1, Depth 1
+CURRENT_STATE =
+The farmer is on the right
+The fox is on the left
+The chicken is on the right
+The grain is on the left
+The boat is on the right.
+
+0: Cross the river with no other person
+2: Cross the river with the chicken
+Enter command: 0, 1, 2, etc. for operator; B-back; H-help; Q-quit. >> 0
+Operator 0 selected.
+
+Step 2, Depth 2
+CURRENT_STATE =
+The farmer is on the left
+The fox is on the left
+The chicken is on the right
+The grain is on the left
+The boat is on the left.
+
+0: Cross the river with no other person
+1: Cross the river with the fox
+3: Cross the river with the grain
+Enter command: 0, 1, 2, etc. for operator; B-back; H-help; Q-quit. >> 3
+Operator 3 selected.
+
+Step 3, Depth 3
+CURRENT_STATE =
+The farmer is on the right
+The fox is on the left
+The chicken is on the right
+The grain is on the right
+The boat is on the right.
+
+2: Cross the river with the chicken
+3: Cross the river with the grain
+Enter command: 0, 1, 2, etc. for operator; B-back; H-help; Q-quit. >> 2
+Operator 2 selected.
+
+Step 4, Depth 4
+CURRENT_STATE =
+The farmer is on the left
+The fox is on the left
+The chicken is on the left
+The grain is on the right
+The boat is on the left.
+
+1: Cross the river with the fox
+2: Cross the river with the chicken
+Enter command: 0, 1, 2, etc. for operator; B-back; H-help; Q-quit. >> 1
+Operator 1 selected.
+
+Step 5, Depth 5
+CURRENT_STATE =
+The farmer is on the right
+The fox is on the right
+The chicken is on the left
+The grain is on the right
+The boat is on the right.
+
+0: Cross the river with no other person
+1: Cross the river with the fox
+3: Cross the river with the grain
+Enter command: 0, 1, 2, etc. for operator; B-back; H-help; Q-quit. >> 0
+Operator 0 selected.
+
+Step 6, Depth 6
+CURRENT_STATE =
+The farmer is on the left
+The fox is on the right
+The chicken is on the left
+The grain is on the right
+The boat is on the left.
+
+0: Cross the river with no other person
+2: Cross the river with the chicken
+Enter command: 0, 1, 2, etc. for operator; B-back; H-help; Q-quit. >> 2
+Operator 2 selected.
+
+Step 7, Depth 7
+CURRENT_STATE =
+The farmer is on the right
+The fox is on the right
+The chicken is on the right
+The grain is on the right
+The boat is on the right.
+
+CONGRATULATIONS!
+You have solved the problem by reaching a goal state.
+Do you wish to continue exploring?
+
+Y or N? >>

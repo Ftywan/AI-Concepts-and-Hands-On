@@ -1,9 +1,16 @@
-'''Farmer_Fox.py
+'''
+
+Farmer_Fox.py
 by Tianyuan Fu
 UWNetID: tyfu
 Student number: 1974487
 
 Assignment 2, in CSE 415, Autumn 2019.
+ 
+This file contains my problem formulation for the problem of
+the Farmer, Fox, Chicken, and Grain.
+
+
 '''
 
 # <METADATA>

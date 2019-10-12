@@ -1,11 +1,14 @@
-''' starter-file-for.py  CHANGE THIS WHEN YOU EDIT IT, TO UCS.py
-by  (YOUR NAME HERE)
+'''
 
-PUT YOUR ADDITIONAL COMMENTS HERE, SUCH AS EMAIL ADDRESS, VERSION INFO, ETC>
+UCS.py
+by Tianyuan Fu
+UWNetID: tyfu
+Student number: 1974487
 
-STUDENTS: COMPLETE THE IMPLEMENTATION OF UCS.py BY WRITING CODE WHERE
-INDICATED BELOW IN THE COMMENTS STARTING WITH "***STUDENTS".
-
+Assignment 2, in CSE 415, Autumn 2019.
+ 
+This file contains my implementation of a 
+Uniform Cost Search algorithm.
 
 This file Includes a priority queue implementation by 
  S. Tanimoto, Univ. of Washington.

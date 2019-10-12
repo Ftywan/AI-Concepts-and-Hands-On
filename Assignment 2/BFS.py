@@ -1,15 +1,16 @@
-#!/usr/bin/python3
-''' ItrDFS.py
-Iterative Depth-First Search of a problem space.
- Version 0.4, January 15, 2018.
- Steve Tanimoto, Univ. of Washington.
- Paul G. Allen School of Computer Science and Engineering
+'''
 
- Usage:
- python3 ItrDFS.py TowersOfHanoi
-# The numbered STEP comments in the function IterativeDFS correspond
- to the algorithm steps for iterative depth-first as presented
- in Slide 7 of the "Basic Search Algorithms" lecture.
+BFS.py
+by Tianyuan Fu
+UWNetID: tyfu
+Student number: 1974487
+
+Assignment 2, in CSE 415, Autumn 2019.
+ 
+This file contains my implementation of a Breadth-First-Search
+algorithm.
+
+
 '''
 
 import sys
