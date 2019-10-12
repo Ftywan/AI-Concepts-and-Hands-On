@@ -18,8 +18,8 @@ city of Rennes to the city of Avignon, using the map data provided.
 #</METADATA>
 
 #<COMMON_DATA>
-STARTING_CITY = "Paris"
-DESTINATION_CITY = "Marseille"
+STARTING_CITY = "Rennes"
+DESTINATION_CITY = "Avignon"
 STATES = {}
 
 ADJ = {}
