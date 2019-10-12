@@ -138,7 +138,7 @@ def UCS(initial_state):
   g[initial_state]=0.0
 
 # STEP 2. If OPEN is empty, output “DONE” and stop.
-  while False: # ***STUDENTS CHANGE THIS CONDITION***
+  while OPEN != []: # ***STUDENTS CHANGE THIS CONDITION***
     # LEAVE THE FOLLOWING CODE IN PLACE TO INSTRUMENT AND/OR DEBUG YOUR IMPLEMENTATION
     if VERBOSE: report(OPEN, CLOSED, COUNT)
     if len(OPEN)>MAX_OPEN_LENGTH: MAX_OPEN_LENGTH = len(OPEN)
@@ -152,13 +152,36 @@ def UCS(initial_state):
     CLOSED.append(S)
 
     if Problem.GOAL_TEST(S):
-      pass # ***STUDENTS CHANGE THE BODY OF THIS IF.***
+      # ***STUDENTS CHANGE THE BODY OF THIS IF.***
       #HANDLE THE BACKTRACING, RECORDING THE SOLUTION AND TOTAL COST,
       # AND RETURN THE SOLUTION PATH, TOO.
+      TOTAL_COST = g[S]
+      print(Problem.GOAL_MESSAGE_FUNCTION(S))
+      path = backtrace(S)
+      print('Total cost would be: ' + str(TOTAL_COST))
+      print('Length of solution path found: '+str(len(path)-1)+' edges')
+      return path
     COUNT += 1
 
 # STEP 4. Generate each successor of S
 #         and if it is already on CLOSED, delete the new instance.
+    for op in Problem.OPERATORS:
+      if op.precond(S):
+        new_city = op.state_transf(S)
+        cost = S.edge_distance(new_city) + g[S]
+        if OPEN.__contains__(new_city):
+          if cost < OPEN.__getitem__(new_city):
+            OPEN.__delitem__(new_city)
+            OPEN.insert(new_city, cost)
+            g[new_city] = cost
+            BACKLINKS[new_city] = S
+        elif new_city in CLOSED:
+          del new_city
+        else:
+          OPEN.insert(new_city, cost)
+          g[new_city] = cost
+          BACKLINKS[new_city] = S
+
 
 
    # ***STUDENTS IMPLEMENT THE GENERATION AND HANDLING OF SUCCESSORS HERE,
