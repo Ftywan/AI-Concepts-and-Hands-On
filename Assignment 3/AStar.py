@@ -28,7 +28,7 @@ if sys.argv==[''] or len(sys.argv)<2:
   try:
     import FranceWithDXHeuristic as Problem
   except:
-    print("Note that the EightPuzzle formulation will be used in Assignment 3, not Assignment 2")
+    print("Note that the FranceWithDXHeuristic formulation will be used in Assignment 3, not Assignment 2")
     print("Try python3 AStar.py FranceWithCosts")
 
 else:
@@ -46,6 +46,7 @@ BACKLINKS = {} # Predecessor links, used to recover the path.
 # The value g(s) represents the cost along the best path found so far
 # from the initial state to state s.
 g = {} # We will use a global hash table to associate g values with states.
+h = Problem.h
 
 class My_Priority_Queue:
   def __init__(self):
@@ -127,8 +128,8 @@ def runAStar():
   print('MAX_OPEN_LENGTH = '+str(MAX_OPEN_LENGTH))
 
 def AStar(initial_state):
-  '''Uniform Cost Search. This is the actual algorithm.'''
-  global g, COUNT, BACKLINKS, MAX_OPEN_LENGTH, CLOSED, TOTAL_COST
+  '''A* Search. This is the actual algorithm.'''
+  global g, h, COUNT, BACKLINKS, MAX_OPEN_LENGTH, CLOSED, TOTAL_COST
   CLOSED = []
   BACKLINKS[initial_state] = None
   # The "Step" comments below help relate AStar's implementation to
@@ -136,7 +137,7 @@ def AStar(initial_state):
 
 # STEP 1a. Put the start state on a priority queue called OPEN
   OPEN = My_Priority_Queue()
-  OPEN.insert(initial_state, 0)
+  OPEN.insert(initial_state, h(initial_state))
 # STEP 1b. Assign g=0 to the start state.
   g[initial_state]=0.0
 
@@ -171,21 +172,18 @@ def AStar(initial_state):
     for op in Problem.OPERATORS:
       if op.precond(S):
         new_city = op.state_transf(S)
-        cost = S.edge_distance(new_city) + g[S]
+        cost = S.edge_distance(new_city) + g[S] # This is the real cost from the beginning point
+        priority = cost + h(new_city) # This is the estimation with value of heuristic
         if OPEN.__contains__(new_city):
-          if cost < OPEN.__getitem__(new_city):
+          if priority < OPEN.__getitem__(new_city):
             OPEN.__delitem__(new_city)
-            OPEN.insert(new_city, cost)
-            g[new_city] = cost
-            BACKLINKS[new_city] = S
+            update_new_state(OPEN, S, new_city, cost, priority)
         elif new_city in CLOSED:
-          del new_city
+          if cost < g[new_city]:
+            CLOSED.remove(new_city)
+            update_new_state(OPEN, S, new_city, cost, priority)
         else:
-          OPEN.insert(new_city, cost)
-          g[new_city] = cost
-          BACKLINKS[new_city] = S
-
-
+          update_new_state(OPEN, S, new_city, cost, priority)
 
    # ***STUDENTS IMPLEMENT THE GENERATION AND HANDLING OF SUCCESSORS HERE,
    # USING THE GIVEN PRIORITY QUEUE FOR THE OPEN LIST, AND
@@ -194,6 +192,11 @@ def AStar(initial_state):
 
   # STEP 6. Go to Step 2.
   return None  # No more states on OPEN, and no goal reached.
+
+def update_new_state(pq, pre_state, new_state, real_cost, priority):
+  pq.insert(new_state, priority)
+  g[new_state] = real_cost
+  BACKLINKS[new_state] = pre_state
 
 def print_state_queue(name, q):
   print(name+" is now: ",end='')
