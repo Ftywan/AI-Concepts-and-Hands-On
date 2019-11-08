@@ -29,7 +29,7 @@ class TTS_State:
         new_board = [r[:] for r in board]  # Deeply copy the board.
         #print("new_board is " + str(new_board))
         self.board = new_board
-        self.whose_turn = whose_turn;
+        self.whose_turn = whose_turn
 
     def __str__(self): # Produce an ASCII display of the state.
         s = 'TTS_State([\n'
