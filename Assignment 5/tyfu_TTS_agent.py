@@ -11,8 +11,7 @@ UW NetID: tyfu@uw.edu
 from TTS_State import TTS_State
 import random
 import time
-from threading import Thread, Event
-
+from threading import Event, Thread
 stop_event = Event()
 
 USE_CUSTOM_STATIC_EVAL_FUNCTION = False
@@ -22,9 +21,9 @@ INITIAL_STATE = [
     [" ", " ", " ", " "],
     [" ", " ", " ", " "],
 ]
-WHO_I_PLAY = "W"
 PLAYER_2_NICKNAME = "Tarnimoto"
 K = 2
+global max_location, max_value, min_location, min_value
 
 
 # TODO: customized static evaluation function
@@ -265,10 +264,7 @@ def minimax(current_state, use_alpha_beta, use_basic_static_eval,alpha, beta, pl
     return provisional
 
 def take_turn(current_state, last_utterance, time_limit):
-    current_state = MY_TTS_State(current_state.board)
-    end = time.time() + time_limit
-    depth = 16
-
+    global max_value, max_location, min_value, min_location
     # Compute the new state for a move.
     # Start by copying the current state.
     new_state = MY_TTS_State(current_state.board)
@@ -277,18 +273,19 @@ def take_turn(current_state, last_utterance, time_limit):
     new_who = "B"
     if who == "B":
         new_who = "W"
-    new_state.whose_turn = new_who
+    new_state.whose_turn = new_who    
+    current_state = MY_TTS_State(current_state.board)
 
     # Place a new tile
     # location: a point tuple
-    global max_location, max_value, min_location, min_value
     successors = get_all_successor_states(current_state)
+
     max_location = _find_next_vacancy(new_state.board)
     min_location = max_location
     max_value = parameterized_minimax(current_state.move(max_location))['CURRENT_STATE_STATIC_VAL']
     min_value = max_value
 
-    action_tread = Thread(target=iddfs, args=successors)
+    action_tread = Thread(target=iddfs, args=(successors,stop_event))
     action_tread.start()
     action_tread.join(timeout=time_limit)
 
@@ -299,9 +296,9 @@ def take_turn(current_state, last_utterance, time_limit):
     if new_who == "B":
         location = min_location
 
-        if location == False:
-            return [[False, current_state], "I don't have any moves!"]
-        new_state.board[location[0]][location[1]] = who
+    if location == False:
+        return [[False, current_state], "I don't have any moves!"]
+    new_state.board[location[0]][location[1]] = who
 
     # Construct a representation of the move that goes from the
     # currentState to the newState.
@@ -312,9 +309,11 @@ def take_turn(current_state, last_utterance, time_limit):
 
     return [[move, new_state], new_utterance]
 
-def iddfs(successors):
+def iddfs(successors, stop_event):
+    global max_value, max_location, min_value, min_location
     depth = 1
-    while depth <= len(successors):
+    
+    while depth <= len(successors) and not stop_event.is_set():
         for s in successors:
             point = successors[s]
             next_state_data = parameterized_minimax(s, depth, True, False)
@@ -324,6 +323,8 @@ def iddfs(successors):
             if next_state_data["CURRENT_STATE_STATIC_VAL"] < min_value:
                 min_location = point
                 min_value = next_state_data["CURRENT_STATE_STATIC_VAL"]
+            depth += 1
+    
 
 def _find_next_vacancy(b):
     for i in range(len(b)):
