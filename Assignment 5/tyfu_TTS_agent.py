@@ -131,9 +131,44 @@ class MY_TTS_State(TTS_State):
         return TWF - TBF
 
     def custom_static_eval(self):
-        # raise Exception("custom_static_eval not yet implemented.")
-        # TODO:
-        return 1
+        TWF = 0
+        TBF = 0
+        height = len(self.board)
+        width = len(self.board[0])
+
+        for i in height:
+            for j in width:
+                if self.board[i][j] == 'W':
+                    TWF += self.w_value(i, j)
+                if self.board[i][j] == 'B':
+                    TBF += self.b_value(i, j)
+        return TWF - TBF
+    
+    def w_value(self, i, j):
+        board = self.board
+        height = len(board)
+        width = len(board[0])
+        if board[i][j] == 'W':
+            board[i][j] = ' '
+            return 10 * self.w_value(i, (j + 1) % width) * self.w_value((i + 1) % height, j)\
+                * self.w_value(i, (j - 1) % width) * self.w_value((i - 1) % height, j)\
+                * self.w_value((i + 1) % height, (j + 1) % width) * self.w_value((i - 1) % height, (j + 1) % width)\
+                * self.w_value((i + 1) % height, (j - 1) % width) * self.w_value((i - 1) % height, (j - 1) % width)
+        else: 
+            return 1
+    
+    def b_value(self, i, j):
+        board = self.board
+        height = len(board)
+        width = len(board[0])
+        if board[i][j] == 'W':
+            board[i][j] = ' '
+            return 10 * self.b_value(i, (j + 1) % width) * self.b_value((i + 1) % height, j)\
+                * self.b_value(i, (j - 1) % width) * self.b_value((i - 1) % height, j)\
+                * self.b_value((i + 1) % height, (j + 1) % width) * self.b_value((i - 1) % height, (j + 1) % width)\
+                * self.b_value((i + 1) % height, (j - 1) % width) * self.b_value((i - 1) % height, (j - 1) % width)
+        else: 
+            return 1
 
     def pad_x(self, x):
         width = len(self.board[0])
@@ -254,7 +289,7 @@ def take_turn(current_state, last_utterance, time_limit):
 
         for s in successors:
             point = successors[s]
-            next_state_data = parameterized_minimax(s, depth, True, True)
+            next_state_data = parameterized_minimax(s, depth, True, False)
             if next_state_data["CURRENT_STATE_STATIC_VAL"] > max_value:
                 max_location = point
                 max_value = next_state_data["CURRENT_STATE_STATIC_VAL"]
