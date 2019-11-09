@@ -11,6 +11,9 @@ UW NetID: tyfu@uw.edu
 from TTS_State import TTS_State
 import random
 import time
+from threading import Thread, Event
+
+stop_event = Event()
 
 USE_CUSTOM_STATIC_EVAL_FUNCTION = False
 INITIAL_STATE = [
@@ -136,8 +139,8 @@ class MY_TTS_State(TTS_State):
         height = len(self.board)
         width = len(self.board[0])
 
-        for i in height:
-            for j in width:
+        for i in range(height):
+            for j in range(width):
                 if self.board[i][j] == 'W':
                     TWF += self.w_value(i, j)
                 if self.board[i][j] == 'B':
@@ -278,26 +281,18 @@ def take_turn(current_state, last_utterance, time_limit):
 
     # Place a new tile
     # location: a point tuple
+    global max_location, max_value, min_location, min_value
     successors = get_all_successor_states(current_state)
     max_location = _find_next_vacancy(new_state.board)
     min_location = max_location
     max_value = parameterized_minimax(current_state.move(max_location))['CURRENT_STATE_STATIC_VAL']
     min_value = max_value
 
+    action_tread = Thread(target=iddfs, args=successors)
+    action_tread.start()
+    action_tread.join(timeout=time_limit)
 
-    while time.time() < end and depth <= len(successors):
-
-        for s in successors:
-            point = successors[s]
-            next_state_data = parameterized_minimax(s, depth, True, False)
-            if next_state_data["CURRENT_STATE_STATIC_VAL"] > max_value:
-                max_location = point
-                max_value = next_state_data["CURRENT_STATE_STATIC_VAL"]
-            if next_state_data["CURRENT_STATE_STATIC_VAL"] < min_value:
-                min_location = point
-                min_value = next_state_data["CURRENT_STATE_STATIC_VAL"]
-
-        depth += 1
+    stop_event.set()
 
     if new_who == "W":
         location = max_location
@@ -317,6 +312,18 @@ def take_turn(current_state, last_utterance, time_limit):
 
     return [[move, new_state], new_utterance]
 
+def iddfs(successors):
+    depth = 1
+    while depth <= len(successors):
+        for s in successors:
+            point = successors[s]
+            next_state_data = parameterized_minimax(s, depth, True, False)
+            if next_state_data["CURRENT_STATE_STATIC_VAL"] > max_value:
+                max_location = point
+                max_value = next_state_data["CURRENT_STATE_STATIC_VAL"]
+            if next_state_data["CURRENT_STATE_STATIC_VAL"] < min_value:
+                min_location = point
+                min_value = next_state_data["CURRENT_STATE_STATIC_VAL"]
 
 def _find_next_vacancy(b):
     for i in range(len(b)):
