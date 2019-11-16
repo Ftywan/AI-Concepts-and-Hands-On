@@ -35,7 +35,7 @@ Value Iteration.
 
 '''
 
-import YourUWNetID_VI as VI
+import tyfu_VI as VI
 import YourUWNetID_Q_Learn as Q_Learn
 
 from TowersOfHanoi import *
