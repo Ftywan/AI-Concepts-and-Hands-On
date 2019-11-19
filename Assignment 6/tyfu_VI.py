@@ -91,12 +91,13 @@ def extract_policy(S, A):
    Policy = {}
 
    Q_values = return_Q_values(S, A)
+
    for s in S:
       # find the maximized utility
-      Policy[s] = A[0]
-      utility = Q_values[(s, A[0])]
+      utility = -math.inf
       for a in A:
          if Q_values[(s, a)] > utility:
+            utility = Q_values[(s, a)]
             Policy[s] = a
 
    return Policy
